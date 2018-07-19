@@ -8,3 +8,10 @@ Download the whole thing and put the STReputation folder into your addons folder
 
 ### What can I do with it?
 I'm not gonna officially stick a license on it because I don't care that much, but you can modify it however you want, and upload it to the workshop if you really want to, but please just make it look good.  Don't leave the description as "Description" and don't select a random image from your desktop.
+
+### Quick features list:
+ • Kill someone and lose reputation.
+ • Kill someone in self defense and you're fine.
+ • Heal a combined 100 HP and gain reputation.
+ • Kill someone with bad reputation and gain reputation.
+ • Kill someone with good reputation and lose reputation.
