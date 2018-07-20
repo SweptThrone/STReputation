@@ -23,11 +23,11 @@ hook.Add("PlayerDeath", "STReputationDeath", function(vic, inf, atk)
 	-- tests
 	if !IsValid(vic) or !IsValid(atk) or !atk:IsPlayer() then return end
 	if vic == atk then return end
-	-- if the victim is not the attacker's attacker,
+	-- if the victim is not the attacker's attacker AND the victim's rep is 0,
 	-- OR
 	-- if the victim has a positive reputation
 	-- remove reputation
-	if vic != atk:GetNWEntity("rep_attacker") or vic:GetSTReputation() > 0 then
+	if ( vic != atk:GetNWEntity("rep_attacker") and vic:GetSTReputation == 0 ) or vic:GetSTReputation() > 0 then
 		atk:SetSTReputation( atk:GetSTReputation() - 1 )
 		net.Start("strep_downdate")
 		net.Send(atk)
