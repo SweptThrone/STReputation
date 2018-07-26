@@ -1,12 +1,12 @@
 -- STReputation v.GitHub
 
+STREPUTATION_VIGILANTE_JUSTICE = false
+
 util.AddNetworkString("strep_downdate")
 util.AddNetworkString("strep_update")
 util.AddNetworkString("strep_menu")
 
 -- convenience functions
--- untested
--- report issues immediately
 local meta = FindMetaTable( "Player" )
 function meta:GetSTReputation()
 	return self:GetNWInt( "st_rep" )
@@ -16,6 +16,17 @@ function meta:SetSTReputation( rep )
 	rep = rep or 0
 	self:SetPData( "st_reputation", rep )
 	self:SetNWInt( "st_rep", rep )
+end
+
+--untested feature
+local function VigilanteFeature( ply )
+	if STREPUTATION_VIGILANTE_JUSTICE then
+		if IsValid( ply:GetNWEntity( "rep_attacker" ) ) then
+			return true
+		else
+			return false
+		end
+	else return true end
 end
 
 hook.Add("PlayerDeath", "STReputationDeath", function(vic, inf, atk)
@@ -31,7 +42,7 @@ hook.Add("PlayerDeath", "STReputationDeath", function(vic, inf, atk)
 		atk:SetSTReputation( atk:GetSTReputation() - 1 )
 		net.Start("strep_downdate")
 		net.Send(atk)
-	elseif vic:GetSTReputation() < 0 then
+	elseif vic:GetSTReputation() < 0 and VigilanteFeature( vic ) then
 		atk:SetSTReputation( atk:GetSTReputation() + 1 )
 		net.Start("strep_update")
 		net.Send(atk)
