@@ -1,5 +1,8 @@
 -- STReputation v.GitHub
 
+--change this to true if you want people to gain
+--reputation when they kill someone who has recently
+--harmed someone
 STREPUTATION_VIGILANTE_JUSTICE = false
 
 util.AddNetworkString("strep_downdate")
